@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Online Alışveriş Anketi — Olasılık</title>
+
+  <!-- Google Fonts (preconnect + güvenli https) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Basit reset + box-sizing */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+         background:#f6f8fb;color:#0f172a;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+         padding:20px}
+
+    .wrap{max-width:760px;margin:22px auto}
+    .card{background:#fff;border-radius:14px;padding:22px;box-shadow:0 8px 30px rgba(2,6,23,0.06)}
+    h1{margin:0;font-size:20px}
+    .lead{color:#6b7280;margin-top:6px;font-size:14px}
+    label{display:block;margin-top:14px;font-weight:600;color:#111827}
+    .hint{font-size:13px;color:#6b7280;margin-top:6px}
+    input[type="text"],input[type="number"],select,textarea{
+      width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:10px;margin-top:6px;font-size:14px;
+      background:#fbfdff;
+    }
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    @media (max-width:600px){ .grid{grid-template-columns:1fr} }
+    .btn{margin-top:16px;padding:11px 16px;background:#2563eb;color:#fff;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .small{font-size:13px;color:#6b7280}
+    .kpi{margin-top:12px;padding:10px;border-radius:10px;background:#f1f5f9;color:#0f172a;font-weight:600}
+    iframe[name="hidden_iframe"]{display:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Online Alışveriş Anketi</h1>
+      <p class="lead">Kısa, anonim — yaklaşık 1–2 dakika. Lütfen dürüst cevap verin.</p>
+
+      <!-- HIDDEN IFRAME (form target) -->
+      <iframe name="hidden_iframe"></iframe>
+
+      <!-- ACTION_URL yerine apps script URL koy -->
+      <form method="post" action="https://script.google.com/macros/s/AKfycbzkZXjE5Wm7_p1VPyntmOLO-YFP9BFXT3nT9ErEHDsd4AllmqSX1gCLB6TwwFaasLW6nw/exec" target="hidden_iframe" id="surveyForm" autocomplete="off">
+        <label>1) Yaş aralığınız</label>
+        <select name="age_range" required>
+          <option value="">Seçiniz</option><option>18-24</option><option>25-34</option><option>35-44</option><option>45+</option>
+        </select>
+
+        <label>2) Şu anki durumunuz</label>
+        <select name="current_status" required>
+          <option value="">Seçiniz</option>
+          <option>Öğrenci - Önlisans</option>
+          <option>Öğrenci - Lisans</option>
+          <option>Öğrenci - Yüksek Lisans / Doktora</option>
+          <option>Çalışıyorum - Tam zamanlı</option>
+          <option>Çalışıyorum - Yarı zamanlı / Serbest</option>
+        </select>
+
+        <div class="grid">
+          <div>
+            <label>3) Son 1 ay kaç kez alışveriş?</label>
+            <select name="monthly_freq" required><option value="">Seçiniz</option><option>Hiç</option><option>1-2</option><option>3-5</option><option>6-10</option><option>10+</option></select>
+          </div>
+          <div>
+            <label>4) Ortalama harcama (TL)</label>
+            <select name="avg_spend_band" required><option value="">Seçiniz</option><option>0-200</option><option>201-500</option><option>501-1000</option><option>1001+</option></select>
+          </div>
+        </div>
+
+        <label>5) Kupon/indirim kullanma sıklığınız</label>
+        <select name="coupon_freq" required><option value="">Seçiniz</option><option>Hiç</option><option>Nadiren (ayda 1-2)</option><option>Bazen (3-5)</option><option>Sık (6+)</option></select>
+
+        <label>6) Ürün yorumlarını okur musunuz?</label>
+        <select name="read_reviews" required><option value="">Seçiniz</option><option>Her zaman</option><option>Bazen</option><option>Hiç</option></select>
+
+        <label>7) Dürtüsellik — 1 (hiç) → 5 (çok)</label>
+        <div class="grid">
+          <input type="number" name="imp_m1" min="1" max="5" placeholder="Düşünmeden satın alırım (1-5)" required>
+          <input type="number" name="imp_m2" min="1" max="5" placeholder="Ani satın alırım (1-5)" required>
+          <input type="number" name="imp_m3" min="1" max="5" placeholder="Sepeti kısa sürede tamamlarım (1-5)" required>
+          <input type="number" name="imp_m4" min="1" max="5" placeholder="Duygular beni etkiler (1-5)" required>
+        </div>
+
+        <label>8) Satın alırken en önemli faktör</label>
+        <select name="main_factor" required>
+          <option value="">Seçiniz</option>
+          <option>Ücretsiz kargo</option><option>İndirim / Kupon</option><option>Ürün yorumları</option><option>Hızlı kargo</option><option>Kolay iade</option>
+        </select>
+
+        <label class="small"><input type="checkbox" name="consent" value="Evet" required> Anket ödev amaçlıdır ve anonimdir. Onaylıyorum.</label>
+
+        <button class="btn" type="submit">Gönder</button>
+
+        <div class="kpi">Tahmini süre: 1–2 dakika · Anonim</div>
+      </form>
+
+      <p id="msg" class="small" style="color:green"></p>
+    </div>
+  </div>
+
+<script>
+  // iframe yüklendiğinde mesaj göster, form reset
+  var iframe = document.querySelector('iframe[name="hidden_iframe"]');
+  var msg = document.getElementById('msg');
+  iframe.addEventListener('load', function(){
+    msg.textContent = 'Cevabınız kaydedildi — teşekkürler!';
+    document.getElementById('surveyForm').reset();
+  });
+</script>
+</body>
+</html>
