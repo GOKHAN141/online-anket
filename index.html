@@ -1,74 +1,104 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="tr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Online Alışveriş Anketi</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;max-width:760px;margin:24px auto;padding:12px;}
+    label{display:block;margin-top:10px;font-weight:600;}
+    select,input[type="text"],input[type="number"]{width:100%;padding:8px;margin-top:6px;border:1px solid #ccc;border-radius:6px;}
+    button{margin-top:12px;padding:10px 14px;border:0;border-radius:8px;background:#1f8ef1;color:white;font-weight:700;}
+    .hint{font-size:0.9rem;color:#666;margin-top:8px}
+  </style>
 </head>
 <body>
-  <h2>Online Alışveriş Anketi</h2>
-  <form method="post" action="https://script.google.com/macros/s/AKfycbw7lNuorWCcNIahBwIm1z5k5TsW0BP7WUl_thQnxgZU9tVlJMcH_N_BY63XohTgyzuHcQ/exec" target="hidden_iframe">
-    
-    <label>Yaş:</label>
-    <input type="number" name="yas" required><br><br>
-    
-    <label>Cinsiyet:</label>
+  <h1>Online Alışveriş Anketi</h1>
+  <p class="hint">Anket ödev amaçlıdır. Tahmini süre: ~2 dakika.</p>
+
+  <!-- gizli iframe: sayfa yenilenmesin diye -->
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+  <!-- ACTION_URL yerine Apps Script Web App URL koy -->
+  <form method="post" action="https://script.google.com/macros/s/AKfycbwqgE9UNVw4bsMiFRxCvcS9gEaWw0CfEEyKMUfc5iL7DWyglFIFZmSFAfexajPkYTmPNQ/exec" target="hidden_iframe">
+    <label>Yaş</label>
+    <input type="number" name="yas" min="15" max="100" required>
+
+    <label>Cinsiyet</label>
     <select name="cinsiyet" required>
-      <option value="Erkek">Erkek</option>
-      <option value="Kadın">Kadın</option>
-      <option value="Diğer">Diğer</option>
-    </select><br><br>
-    
-    <label>Eğitim:</label>
+      <option value="">Seçiniz</option>
+      <option>Erkek</option>
+      <option>Kadın</option>
+      <option>Diğer</option>
+      <option>Söylemek istemiyorum</option>
+    </select>
+
+    <label>Eğitim</label>
     <select name="egitim" required>
-      <option value="Lise">Lise</option>
-      <option value="Ön Lisans">Ön Lisans</option>
-      <option value="Lisans">Lisans</option>
-      <option value="Yüksek Lisans">Yüksek Lisans</option>
-      <option value="Doktora">Doktora</option>
-    </select><br><br>
-    
+      <option value="">Seçiniz</option>
+      <option>Lise</option>
+      <option>Önlisans</option>
+      <option>Lisans</option>
+      <option>Yüksek Lisans / Doktora</option>
+    </select>
+
     <label>Öğrenci misiniz?</label>
     <select name="ogrenci" required>
-      <option value="Evet">Evet</option>
-      <option value="Hayır">Hayır</option>
-    </select><br><br>
-    
-    <label>Bölüm/İş:</label>
-    <input type="text" name="bolum" required><br><br>
-    
-    <label>Alışveriş Sıklığı (Ayda):</label>
+      <option value="">Seçiniz</option>
+      <option>Evet</option>
+      <option>Hayır</option>
+    </select>
+
+    <label>Bölüm / Meslek</label>
+    <input type="text" name="bolum" placeholder="Bölüm veya mesleğinizi yazınız" required>
+
+    <label>Alışveriş sıklığı (ayda)</label>
     <select name="alisveris_sikligi" required>
-      <option value="Hiç">Hiç</option>
-      <option value="1-2">1-2</option>
-      <option value="3-5">3-5</option>
-      <option value="5+">5 ve üzeri</option>
-    </select><br><br>
-    
-    <label>Cihaz Tercihi:</label>
+      <option value="">Seçiniz</option>
+      <option>Hiç</option>
+      <option>1-2</option>
+      <option>3-5</option>
+      <option>6+</option>
+    </select>
+
+    <label>Cihaz tercihi</label>
     <select name="cihaz" required>
-      <option value="Mobil">Mobil</option>
-      <option value="Bilgisayar">Bilgisayar</option>
-      <option value="Tablet">Tablet</option>
-    </select><br><br>
-    
-    <label>Ürün Kategorisi:</label>
+      <option value="">Seçiniz</option>
+      <option>Mobil / Akıllı Telefon</option>
+      <option>Masaüstü / Dizüstü</option>
+      <option>Tablet</option>
+    </select>
+
+    <label>En çok aldığınız ürün kategorisi</label>
     <select name="urun_kategori" required>
-      <option value="Giyim">Giyim</option>
-      <option value="Elektronik">Elektronik</option>
-      <option value="Kozmetik">Kozmetik</option>
-      <option value="Gıda">Gıda</option>
-      <option value="Kitap">Kitap</option>
-    </select><br><br>
-    
-    <label>Motivasyon:</label>
-    <input type="text" name="motivasyon" required><br><br>
-    
-    <label>Endişe:</label>
-    <input type="text" name="endise" required><br><br>
-    
+      <option value="">Seçiniz</option>
+      <option>Giyim</option>
+      <option>Elektronik</option>
+      <option>Kozmetik</option>
+      <option>Gıda</option>
+      <option>Kitap</option>
+      <option>Diğer</option>
+    </select>
+
+    <label>Motivasyon (kısa)</label>
+    <input type="text" name="motivasyon" placeholder="Örn: indirim, zaman tasarrufu" required>
+
+    <label>Endişeniz (kısa)</label>
+    <input type="text" name="endise" placeholder="Örn: ödeme güvenliği, iade" required>
+
+    <label style="margin-top:10px"><input type="checkbox" name="consent" value="Evet" required> Anket ödev amaçlıdır ve anonimdir. Onaylıyorum.</label>
+
     <button type="submit">Gönder</button>
   </form>
-  
-  <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+  <p id="msg" class="hint"></p>
+
+  <script>
+    // iframe yüklendiğinde mesaj göster
+    document.getElementById('hidden_iframe').addEventListener('load', function(){
+      document.getElementById('msg').innerText = 'Cevabınız kaydedildi — teşekkürler!';
+      document.querySelector('form').reset();
+    });
+  </script>
 </body>
 </html>
