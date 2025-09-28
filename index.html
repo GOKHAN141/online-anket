@@ -1,153 +1,74 @@
-<!doctype html>
-<html lang="tr">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Olasılık — Online Alışveriş Anketi</title>
-  <style>
-    body{font-family:Arial,Helvetica,sans-serif;background:#f6f7fb;padding:18px;}
-    .card{max-width:720px;margin:20px auto;background:#fff;padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06);}
-    label{display:block;margin-top:12px;font-weight:600;}
-    select,input[type="text"],input[type="number"],textarea{width:100%;padding:8px;margin-top:6px;border:1px solid #ddd;border-radius:6px;}
-    .row{display:flex;gap:8px;}
-    button{margin-top:14px;padding:10px 14px;border:0;border-radius:8px;background:#1f8ef1;color:#fff;font-weight:700;}
-    .small{font-size:0.9rem;color:#666;margin-top:6px;}
-    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:8px; }
-    @media (max-width:600px){ .grid{grid-template-columns: 1fr} }
-  </style>
+  <meta charset="UTF-8">
+  <title>Online Alışveriş Anketi</title>
 </head>
 <body>
-  <div class="card">
-    <h2>Olasılık.com — Online Alışveriş Anketi</h2>
-    <p class="small">Anket ödev amaçlıdır, anonimdir. Tahmini süre: ~2 dakika.</p>
-
-    <form id="survey">
-      <!-- Q1 consent hidden as checkbox at end, but we show short notice -->
-      <label>Yaş aralığınız</label>
-      <select name="age_range" required>
-        <option value="">Seçiniz</option>
-        <option>18-24</option>
-        <option>25-34</option>
-        <option>35-44</option>
-        <option>45+</option>
-      </select>
-
-      <label>Şu anki durumunuz</label>
-      <select name="current_status" required>
-        <option value="">Seçiniz</option>
-        <option>Öğrenci - Önlisans</option>
-        <option>Öğrenci - Lisans</option>
-        <option>Öğrenci - Yüksek Lisans</option>
-        <option>Öğrenci - Doktora</option>
-        <option>Çalışıyorum - Tam zamanlı</option>
-        <option>Çalışıyorum - Yarı zamanlı/Serbest</option>
-        <option>İş arıyorum / İşsiz</option>
-      </select>
-
-      <label>Aylık kişisel gelir aralığınız (opsiyonel)</label>
-      <select name="income_band">
-        <option value="">Belirtmek istemiyorum</option>
-        <option>&lt;2000</option>
-        <option>2000-5000</option>
-        <option>5001-10000</option>
-        <option>10001+</option>
-      </select>
-
-      <label>Son 1 ayda kaç kez online alışveriş yaptınız?</label>
-      <select name="monthly_freq" required>
-        <option value="">Seçiniz</option>
-        <option>Hiç</option>
-        <option>1-2</option>
-        <option>3-5</option>
-        <option>6-10</option>
-        <option>10+</option>
-      </select>
-
-      <label>Bir siparişte ortalama ne kadar harcıyorsunuz? (TL)</label>
-      <select name="avg_spend_band" required>
-        <option value="">Seçiniz</option>
-        <option>0-200</option>
-        <option>201-500</option>
-        <option>501-1000</option>
-        <option>1001+</option>
-      </select>
-
-      <label>Kupon/indirim kullanma sıklığınız</label>
-      <select name="coupon_freq" required>
-        <option value="">Seçiniz</option>
-        <option>Hiç</option>
-        <option>Nadiren (ayda 1-2)</option>
-        <option>Bazen (3-5)</option>
-        <option>Sık (6+)</option>
-      </select>
-
-      <label>Satın almadan önce ürün yorumlarını okur musunuz?</label>
-      <select name="read_reviews" required>
-        <option value="">Seçiniz</option>
-        <option>Her zaman</option>
-        <option>Bazen</option>
-        <option>Hiç</option>
-      </select>
-
-      <label>Dürtüsellik (her biri 1-5, 1=Kesinlikle Katılmıyorum, 5=Kesinlikle Katılıyorum)</label>
-      <div class="grid">
-        <input name="imp_m1" type="number" min="1" max="5" placeholder="Çoğu zaman düşünmeden satın alırım (1-5)" required>
-        <input name="imp_m2" type="number" min="1" max="5" placeholder="Bir ürünü görünce ani satın alırım (1-5)" required>
-        <input name="imp_m3" type="number" min="1" max="5" placeholder="Sepete koyup kısa sürede alırım (1-5)" required>
-        <input name="imp_m4" type="number" min="1" max="5" placeholder="Alışverişte duygular beni etkiler (1-5)" required>
-      </div>
-
-      <label>Bir ürünü online satın alırken en önemli faktör hangisi?</label>
-      <select name="main_factor" required>
-        <option value="">Seçiniz</option>
-        <option>Ücretsiz kargo</option>
-        <option>İndirim/kupon</option>
-        <option>Ürün yorumları</option>
-        <option>Hızlı kargo</option>
-        <option>Kolay iade</option>
-        <option>Marka güvenilirliği</option>
-      </select>
-
-      <label style="margin-top:12px;">
-        <input type="checkbox" name="consent" value="Evet" required> Bu anket ödev amaçlıdır ve anonimdir. Katılıyorum.
-      </label>
-
-      <button type="submit">Gönder</button>
-      <p id="msg" class="small"></p>
-    </form>
-  </div>
-
-<script>
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbw4Q4mQ7blWUeexu4Av4C_9La5SgngCH2LbyNaQKfQqG_TZzMUJZmQ1sybkiCM02cc_Qw/exec'; // ===> buraya Apps Script Web app URL koy
-
-document.getElementById('survey').addEventListener('submit', async function(e){
-  e.preventDefault();
-  const form = e.target;
-  const fd = new FormData(form);
-  const obj = {};
-  fd.forEach((v,k) => obj[k]=v);
-
-  // impulsivity score hesapla
-  const im1 = Number(obj.imp_m1||0), im2 = Number(obj.imp_m2||0), im3 = Number(obj.imp_m3||0), im4 = Number(obj.imp_m4||0);
-  obj.impulsivity_score = ((im1+im2+im3+im4)/4).toFixed(2);
-
-  try {
-    const res = await fetch(ENDPOINT, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(obj)
-    });
-    const data = await res.json();
-    if (data.status === 'ok') {
-      document.getElementById('msg').innerText = 'Teşekkürler — yanıtınız alındı.';
-      form.reset();
-    } else {
-      document.getElementById('msg').innerText = 'Sunucu hatası: ' + (data.message || 'bilinmiyor');
-    }
-  } catch (err) {
-    document.getElementById('msg').innerText = 'Gönderme hatası: ' + err.toString();
-  }
-});
-</script>
+  <h2>Online Alışveriş Anketi</h2>
+  <form method="post" action="https://script.google.com/macros/s/AKfycbw7lNuorWCcNIahBwIm1z5k5TsW0BP7WUl_thQnxgZU9tVlJMcH_N_BY63XohTgyzuHcQ/exec" target="hidden_iframe">
+    
+    <label>Yaş:</label>
+    <input type="number" name="yas" required><br><br>
+    
+    <label>Cinsiyet:</label>
+    <select name="cinsiyet" required>
+      <option value="Erkek">Erkek</option>
+      <option value="Kadın">Kadın</option>
+      <option value="Diğer">Diğer</option>
+    </select><br><br>
+    
+    <label>Eğitim:</label>
+    <select name="egitim" required>
+      <option value="Lise">Lise</option>
+      <option value="Ön Lisans">Ön Lisans</option>
+      <option value="Lisans">Lisans</option>
+      <option value="Yüksek Lisans">Yüksek Lisans</option>
+      <option value="Doktora">Doktora</option>
+    </select><br><br>
+    
+    <label>Öğrenci misiniz?</label>
+    <select name="ogrenci" required>
+      <option value="Evet">Evet</option>
+      <option value="Hayır">Hayır</option>
+    </select><br><br>
+    
+    <label>Bölüm/İş:</label>
+    <input type="text" name="bolum" required><br><br>
+    
+    <label>Alışveriş Sıklığı (Ayda):</label>
+    <select name="alisveris_sikligi" required>
+      <option value="Hiç">Hiç</option>
+      <option value="1-2">1-2</option>
+      <option value="3-5">3-5</option>
+      <option value="5+">5 ve üzeri</option>
+    </select><br><br>
+    
+    <label>Cihaz Tercihi:</label>
+    <select name="cihaz" required>
+      <option value="Mobil">Mobil</option>
+      <option value="Bilgisayar">Bilgisayar</option>
+      <option value="Tablet">Tablet</option>
+    </select><br><br>
+    
+    <label>Ürün Kategorisi:</label>
+    <select name="urun_kategori" required>
+      <option value="Giyim">Giyim</option>
+      <option value="Elektronik">Elektronik</option>
+      <option value="Kozmetik">Kozmetik</option>
+      <option value="Gıda">Gıda</option>
+      <option value="Kitap">Kitap</option>
+    </select><br><br>
+    
+    <label>Motivasyon:</label>
+    <input type="text" name="motivasyon" required><br><br>
+    
+    <label>Endişe:</label>
+    <input type="text" name="endise" required><br><br>
+    
+    <button type="submit">Gönder</button>
+  </form>
+  
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
 </body>
 </html>
