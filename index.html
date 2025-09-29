@@ -4,19 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Online Alışveriş Anketi — Olasılık</title>
-
-  <!-- Google Fonts (preconnect + güvenli https) -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
-    /* Basit reset + box-sizing */
     *,*::before,*::after{box-sizing:border-box}
     html,body{height:100%;margin:0}
-    body{font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-         background:#f6f8fb;color:#0f172a;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-         padding:20px}
-
+    body{font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:#f6f8fb;color:#0f172a;padding:20px}
     .wrap{max-width:760px;margin:22px auto}
     .card{background:#fff;border-radius:14px;padding:22px;box-shadow:0 8px 30px rgba(2,6,23,0.06)}
     h1{margin:0;font-size:20px}
@@ -24,8 +17,7 @@
     label{display:block;margin-top:14px;font-weight:600;color:#111827}
     .hint{font-size:13px;color:#6b7280;margin-top:6px}
     input[type="text"],input[type="number"],select,textarea{
-      width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:10px;margin-top:6px;font-size:14px;
-      background:#fbfdff;
+      width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:10px;margin-top:6px;font-size:14px;background:#fbfdff;
     }
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
     @media (max-width:600px){ .grid{grid-template-columns:1fr} }
@@ -41,58 +33,112 @@
       <h1>Online Alışveriş Anketi</h1>
       <p class="lead">Kısa, anonim — yaklaşık 1–2 dakika. Lütfen dürüst cevap verin.</p>
 
-      <!-- HIDDEN IFRAME (form target) -->
       <iframe name="hidden_iframe"></iframe>
 
-      <!-- ACTION_URL yerine apps script URL koy -->
-      <form method="post" action="https://script.google.com/macros/s/AKfycbzkZXjE5Wm7_p1VPyntmOLO-YFP9BFXT3nT9ErEHDsd4AllmqSX1gCLB6TwwFaasLW6nw/exec" target="hidden_iframe" id="surveyForm" autocomplete="off">
-        <label>1) Yaş aralığınız</label>
+      <form method="post" action="https://script.google.com/macros/s/AKfycbziIMTxQ--7SCnhoakzGaJ0ULkcwyaZjNzScBkwRys14GTWGdIjN4qFmakn_OdpqKmVOA/exec" target="hidden_iframe" id="surveyForm" autocomplete="off">
+
+        <!-- Yaş 18..65 -->
+        <label>1) Yaş</label>
         <select name="age_range" required>
-          <option value="">Seçiniz</option><option>18-24</option><option>25-34</option><option>35-44</option><option>45+</option>
+          <option value="">Seçiniz</option>
+          <option>18</option><option>19</option><option>20</option><option>21</option><option>22</option>
+          <option>23</option><option>24</option><option>25</option><option>26</option><option>27</option>
+          <option>28</option><option>29</option><option>30</option><option>31</option><option>32</option>
+          <option>33</option><option>34</option><option>35</option><option>36</option><option>37</option>
+          <option>38</option><option>39</option><option>40</option><option>41</option><option>42</option>
+          <option>43</option><option>44</option><option>45</option><option>46</option><option>47</option>
+          <option>48</option><option>49</option><option>50</option><option>51</option><option>52</option>
+          <option>53</option><option>54</option><option>55</option><option>56</option><option>57</option>
+          <option>58</option><option>59</option><option>60</option><option>61</option><option>62</option>
+          <option>63</option><option>64</option><option>65</option>
         </select>
 
-        <label>2) Şu anki durumunuz</label>
-        <select name="current_status" required>
+        <!-- Cinsiyet -->
+        <label>2) Cinsiyet</label>
+        <select name="gender" required>
           <option value="">Seçiniz</option>
-          <option>Öğrenci - Önlisans</option>
-          <option>Öğrenci - Lisans</option>
-          <option>Öğrenci - Yüksek Lisans / Doktora</option>
-          <option>Çalışıyorum - Tam zamanlı</option>
-          <option>Çalışıyorum - Yarı zamanlı / Serbest</option>
+          <option>Erkek</option><option>Kadın</option><option>Diğer</option><option>Söylemek istemiyorum</option>
+        </select>
+
+        <!-- Şehir (açılır liste: 81 il) -->
+        <label>3) Hangi şehirde yaşıyorsunuz?</label>
+        <select name="city" required>
+          <option value="">Seçiniz</option>
+          <option>Adana</option><option>Adıyaman</option><option>Ağrı</option><option>Amasya</option><option>Ankara</option>
+          <option>Antalya</option><option>Artvin</option><option>Aydın</option><option>Balıkesir</option><option>Bilecik</option>
+          <option>Bingöl</option><option>Bitlis</option><option>Bolu</option><option>Burdur</option><option>Bursa</option>
+          <option>Çanakkale</option><option>Çankırı</option><option>Çorum</option><option>Denizli</option><option>Diyarbakır</option>
+          <option>Edirne</option><option>Elazığ</option><option>Erzincan</option><option>Erzurum</option><option>Eskişehir</option>
+          <option>Gaziantep</option><option>Giresun</option><option>Gümüşhane</option><option>Hakkâri</option><option>Hatay</option>
+          <option>Isparta</option><option>Mersin</option><option>İstanbul</option><option>İzmir</option><option>Kars</option>
+          <option>Kastamonu</option><option>Kayseri</option><option>Kırıkkale</option><option>Kırklareli</option><option>Kırşehir</option>
+          <option>Kilis</option><option>Kocaeli</option><option>Konya</option><option>Kütahya</option><option>Malatya</option>
+          <option>Manisa</option><option>Kahramanmaraş</option><option>Mardin</option><option>Muğla</option><option>Muş</option>
+          <option>Nevşehir</option><option>Niğde</option><option>Ordu</option><option>Rize</option><option>Sakarya</option>
+          <option>Samsun</option><option>Siirt</option><option>Sinop</option><option>Sivas</option><option>Şanlıurfa</option>
+          <option>Şırnak</option><option>Tekirdağ</option><option>Tokat</option><option>Trabzon</option><option>Tunceli</option>
+          <option>Uşak</option><option>Van</option><option>Yozgat</option><option>Zonguldak</option><option>Aksaray</option>
+          <option>Bayburt</option><option>Karaman</option><option>Kırıkkale</option><option>Batman</option><option>Şırnak</option>
+          <option>Bartın</option><option>Ardahan</option><option>Iğdır</option><option>Yalova</option><option>Karabük</option>
+          <option>Kilis</option>
+          <option>Diğer</option>
+        </select>
+
+        <!-- Gelir -->
+        <label>4) Aylık kişisel gelir aralığınız (opsiyonel)</label>
+        <select name="income_band">
+          <option value="">Belirtmek istemiyorum</option>
+          <option>&lt;2000</option><option>2000-5000</option><option>5001-15000</option><option>15001-30000</option><option>30001+</option>
+        </select>
+
+        <!-- Platform -->
+        <label>5) En sık kullandığınız platform</label>
+        <select name="platform" required>
+          <option value="">Seçiniz</option>
+          <option>Trendyol</option><option>Hepsiburada</option><option>n11</option><option>Amazon Türkiye</option>
+          <option>Gittigidiyor</option><option>Sahibinden</option><option>Migros Sanal Market</option><option>Getir</option>
+          <option>Yemeksepeti / Market</option><option>ÇiçekSepeti</option><option>Diğer</option>
         </select>
 
         <div class="grid">
           <div>
-            <label>3) Son 1 ay kaç kez alışveriş?</label>
+            <label>6) Son 1 ayda kaç kez online alışveriş yaptınız?</label>
             <select name="monthly_freq" required><option value="">Seçiniz</option><option>Hiç</option><option>1-2</option><option>3-5</option><option>6-10</option><option>10+</option></select>
           </div>
           <div>
-            <label>4) Ortalama harcama (TL)</label>
-            <select name="avg_spend_band" required><option value="">Seçiniz</option><option>0-200</option><option>201-500</option><option>501-1000</option><option>1001+</option></select>
+            <label>7) Ortalama sipariş başı harcama (TL)</label>
+            <select name="avg_spend_band" required>
+              <option value="">Seçiniz</option>
+              <option>0-500</option><option>501-1500</option><option>1501-3000</option><option>3001-7000</option><option>7001+</option>
+            </select>
           </div>
         </div>
 
-        <label>5) Kupon/indirim kullanma sıklığınız</label>
+        <label>8) Kupon/indirim kullanma sıklığınız</label>
         <select name="coupon_freq" required><option value="">Seçiniz</option><option>Hiç</option><option>Nadiren (ayda 1-2)</option><option>Bazen (3-5)</option><option>Sık (6+)</option></select>
 
-        <label>6) Ürün yorumlarını okur musunuz?</label>
+        <label>9) Satın almadan önce ürün yorumlarını okur musunuz?</label>
         <select name="read_reviews" required><option value="">Seçiniz</option><option>Her zaman</option><option>Bazen</option><option>Hiç</option></select>
 
-        <label>7) Dürtüsellik — 1 (hiç) → 5 (çok)</label>
+        <label>10) Dürtüsellik — 1 (hiç) → 5 (çok)</label>
         <div class="grid">
-          <input type="number" name="imp_m1" min="1" max="5" placeholder="Düşünmeden satın alırım (1-5)" required>
-          <input type="number" name="imp_m2" min="1" max="5" placeholder="Ani satın alırım (1-5)" required>
-          <input type="number" name="imp_m3" min="1" max="5" placeholder="Sepeti kısa sürede tamamlarım (1-5)" required>
-          <input type="number" name="imp_m4" min="1" max="5" placeholder="Duygular beni etkiler (1-5)" required>
+          <input type="number" name="imp_m1" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required>
+          <input type="number" name="imp_m2" min="1" max="5" placeholder="İyi fırsat görünce anında alırım (1-5)" required>
+          <input type="number" name="imp_m3" min="1" max="5" placeholder="Sepetteki ürünleri kısa sürede tamamlarım (1-5)" required>
+          <input type="number" name="imp_m4" min="1" max="5" placeholder="Duygular seçimimi etkiler (1-5)" required>
         </div>
 
-        <label>8) Satın alırken en önemli faktör</label>
+        <label>11) Satın alırken en önemli faktör</label>
         <select name="main_factor" required>
-          <option value="">Seçiniz</option>
-          <option>Ücretsiz kargo</option><option>İndirim / Kupon</option><option>Ürün yorumları</option><option>Hızlı kargo</option><option>Kolay iade</option>
+          <option value="">Seçiniz</option><option>Ücretsiz kargo</option><option>İndirim / Kupon</option><option>Ürün yorumları</option><option>Hızlı kargo</option><option>Kolay iade</option>
         </select>
 
-        <label class="small"><input type="checkbox" name="consent" value="Evet" required> Anket ödev amaçlıdır ve anonimdir. Onaylıyorum.</label>
+        <label>12) Sepete ürün ekleyip almadan bırakma sıklığınız</label>
+        <select name="abandoned_cart" required>
+          <option value="">Seçiniz</option><option>Hiç</option><option>Nadiren</option><option>Bazen</option><option>Sık</option><option>Çoğunlukla</option>
+        </select>
+
+        <label class="small"><input type="checkbox" name="consent" value="Evet" required> Bu anket ödev amaçlıdır ve anonimdir. Onaylıyorum.</label>
 
         <button class="btn" type="submit">Gönder</button>
 
@@ -104,7 +150,6 @@
   </div>
 
 <script>
-  // iframe yüklendiğinde mesaj göster, form reset
   var iframe = document.querySelector('iframe[name="hidden_iframe"]');
   var msg = document.getElementById('msg');
   iframe.addEventListener('load', function(){
