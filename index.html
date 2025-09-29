@@ -32,6 +32,12 @@
     .kpi{margin-top:16px;padding:12px;border-radius:12px;background:#e2e8f0;color:#1e293b;font-weight:600;text-align:center;}
     iframe[name="hidden_iframe"]{display:none;}
     .footer-note{font-size:13px;color:#475569;margin-top:20px;text-align:center;}
+
+    .small-label { 
+  font-size:15px;    /* Yazı boyutu */
+  line-height:1.5;   /* Satır yüksekliği */
+}
+
   </style>
 </head>
 <body>
@@ -80,11 +86,8 @@
           <option>Iğdır</option><option>Yalova</option><option>Karabük</option><option>Osmaniye</option><option>Diğer</option>
         </select>
 
-        <label>4) Aylık kişisel gelir aralığınız (opsiyonel)</label>
-        <select name="income_band">
-          <option value="">Belirtmek istemiyorum</option>
-          <option>&lt;2000</option><option>2000-5000</option><option>5001-15000</option><option>15001-30000</option><option>30001+</option>
-        </select>
+        <label>4) Aylık kişisel geliriniz (opsiyonel)</label>
+        <input type="text" name="income" placeholder="Örn: 4500 TL">
 
         <label>5) En sık kullandığınız platform</label>
         <select name="platform" required>
@@ -96,7 +99,7 @@
 
         <div class="grid">
           <div>
-            <label>6) Son 1 ayda kaç kez online alışveriş yaptınız?</label>
+            <label class="small-label">6) Son 1 ayda kaç kez online alışveriş yaptınız?</label>
             <select name="monthly_freq" required><option value="">Seçiniz</option><option>Hiç</option><option>1-2</option><option>3-5</option><option>6-10</option><option>10+</option></select>
           </div>
           <div>
