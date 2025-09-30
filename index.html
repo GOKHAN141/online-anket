@@ -32,7 +32,6 @@
     .kpi{margin-top:16px;padding:12px;border-radius:12px;background:#e2e8f0;color:#1e293b;font-weight:600;text-align:center;}
     iframe[name="hidden_iframe"]{display:none;}
     .footer-note{font-size:13px;color:#475569;margin-top:20px;text-align:center;}
-
     .small-label { font-size:15px; line-height:1.5; }
 
     /* -------- OVERLAY + SPINNER -------- */
@@ -44,13 +43,13 @@
       align-items: center;
       justify-content: center;
       z-index: 9999;
+      flex-direction: column;
+      text-align: center;
     }
     #overlay .panel {
       background: rgba(255,255,255,0.02);
       padding: 22px 28px;
       border-radius: 12px;
-      text-align: center;
-      color: #fff;
       backdrop-filter: blur(3px);
       min-width: 220px;
     }
@@ -63,8 +62,25 @@
       box-shadow: 0 6px 18px rgba(0,0,0,0.2);
     }
     @keyframes spin{ to { transform: rotate(360deg); } }
-    #overlay .text { font-family: Inter, Arial; font-weight:600; font-size:15px; color:#fff; }
+    #overlay .text { font-family: Inter, Arial; font-weight:600; font-size:15px; color:#fff; margin-top: 10px; }
     /* ------------------------------------ */
+
+    #msg {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #22c55e;
+      color: #fff;
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 16px;
+      z-index: 10000;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 <body>
@@ -77,18 +93,21 @@
 
       <form method="post" action="https://script.google.com/macros/s/AKfycbyyXveh82cnx_hyDBgIPSVlhDVpnrIHGRG35bvvgiJcnidaggUq_VR3wAyuIlz2_JnE/exec" target="hidden_iframe" id="surveyForm" autocomplete="off">
 
+        <!-- 1) Yaş -->
         <label>1) Yaş</label>
         <select name="age_range" required>
           <option value="">Seçiniz</option>
           <script>for(let i=18;i<=65;i++){document.write(`<option>${i}</option>`);}</script>
         </select>
 
+        <!-- 2) Cinsiyet -->
         <label>2) Cinsiyet</label>
         <select name="gender" required>
           <option value="">Seçiniz</option>
           <option>Erkek</option><option>Kadın</option>
         </select>
 
+        <!-- 3) Şehir -->
         <label>3) Hangi şehirde yaşıyorsunuz?</label>
         <select name="city" required>
           <option value="">Seçiniz</option>
@@ -110,6 +129,7 @@
           <option>Iğdır</option><option>Yalova</option><option>Karabük</option><option>Osmaniye</option><option>Diğer</option>
         </select>
 
+        <!-- Diğer form alanları (4-11) ve checkbox -->
         <label>4) Aylık kişisel geliriniz (opsiyonel)</label>
         <input type="number" name="income" placeholder="Örn: 4500 TL" min="0" step="1">
 
@@ -143,63 +163,34 @@
 
         <label>10) Dürtüsellik — 1 (hiç) → 5 (çok)</label>
         <div class="grid">
-<input type="number" name="imp_m1" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required
-       oninput="
-       if(this.value===''){return;} 
-       let val = parseInt(this.value);
-       if(val>5) val=5; 
-       if(val<1) val=1;
-       this.value = val;">
-
-<input type="number" name="imp_m2" min="1" max="5" placeholder="İyi fırsat görünce anında alırım (1-5)" required
-       oninput="
-       if(this.value===''){return;} 
-       let val = parseInt(this.value);
-       if(val>5) val=5; 
-       if(val<1) val=1;
-       this.value = val;">
-
-<input type="number" name="imp_m3" min="1" max="5" placeholder="Sepetteki ürünleri kısa sürede tamamlarım (1-5)" required
-       oninput="
-       if(this.value===''){return;} 
-       let val = parseInt(this.value);
-       if(val>5) val=5; 
-       if(val<1) val=1;
-       this.value = val;">
-
-<input type="number" name="imp_m4" min="1" max="5" placeholder="Duygular seçimimi etkiler (1-5)" required
-       oninput="
-       if(this.value===''){return;} 
-       let val = parseInt(this.value);
-       if(val>5) val=5; 
-       if(val<1) val=1;
-       this.value = val;">
-       </div>
+          <input type="number" name="imp_m1" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required oninput="let val=parseInt(this.value); if(val>5) val=5; if(val<1) val=1; this.value=val;">
+          <input type="number" name="imp_m2" min="1" max="5" placeholder="İyi fırsat görünce anında alırım (1-5)" required oninput="let val=parseInt(this.value); if(val>5) val=5; if(val<1) val=1; this.value=val;">
+          <input type="number" name="imp_m3" min="1" max="5" placeholder="Sepetteki ürünleri kısa sürede tamamlarım (1-5)" required oninput="let val=parseInt(this.value); if(val>5) val=5; if(val<1) val=1; this.value=val;">
+          <input type="number" name="imp_m4" min="1" max="5" placeholder="Duygular seçimimi etkiler (1-5)" required oninput="let val=parseInt(this.value); if(val>5) val=5; if(val<1) val=1; this.value=val;">
+        </div>
 
         <label>11) Satın alırken en önemli faktör</label>
         <select name="main_factor" required>
-          <option value="">Seçiniz</option><option>Ücretsiz kargo</option><option>İndirim / Kupon</option><option>Ürün yorumları</option><option>Hızlı kargo</option><option>Kolay iade</option>
+          <option value="">Seçiniz</option>
+          <option>Ücretsiz kargo</option><option>İndirim / Kupon</option><option>Ürün yorumları</option><option>Hızlı kargo</option><option>Kolay iade</option>
         </select>
 
         <label class="small"><input type="checkbox" name="consent" value="Evet" required> Bu anket ödev amaçlıdır ve anonimdir. Onaylıyorum.</label>
 
         <button class="btn" type="submit">Gönder</button>
-
         <div class="kpi">Tahmini süre: 1–2 dakika · Anonim</div>
       </form>
 
-      <!-- OVERLAY: gönderme sırasında gösterilecek -->
-      <div id="overlay" aria-hidden="true">
-        <div class="panel">
-          <div class="spinner" role="status" aria-hidden="true"></div>
-          <div class="text">Gönderiliyor… Lütfen bekleyin</div>
-        </div>
-      </div>
-
       <p class="footer-note">© 2025 Gökhan ÖZTATAR — olasılık.com</p>
-      <p id="msg" class="small" style="color:green"></p>
     </div>
   </div>
+
+  <div id="overlay" aria-hidden="true">
+    <div class="spinner" role="status" aria-hidden="true"></div>
+    <div class="text">Gönderiliyor… Lütfen bekleyin</div>
+  </div>
+
+  <div id="msg">Cevabınız kaydedildi — teşekkürler! ✅</div>
 
 <script>
   (function(){
@@ -209,26 +200,23 @@
     var btn = form.querySelector('button[type="submit"]');
     var iframe = document.querySelector('iframe[name="hidden_iframe"]');
 
-    // submit olunca overlay göster, butonu disable et
     form.addEventListener('submit', function(e){
-      try {
-        btn.disabled = true;
-        btn.style.opacity = 0.6;
-      } catch(err){}
+      btn.disabled = true;
+      btn.style.opacity = 0.6;
       overlay.style.display = 'flex';
-      msg.textContent = ''; // eski mesaj temizle
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // iframe yüklendiğinde (sunucudan cevap geldiğinde) overlay gizle, mesaj göster
     iframe.addEventListener('load', function(){
       overlay.style.display = 'none';
-      try {
-        btn.disabled = false;
-        btn.style.opacity = 1;
-      } catch(err){}
-      msg.style.color = 'green';
-      msg.textContent = 'Cevabınız kaydedildi — teşekkürler!';
-      try { form.reset(); } catch(e){}
+      btn.disabled = false;
+      btn.style.opacity = 1;
+      form.reset();
+
+      msg.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      setTimeout(function(){ msg.style.display = 'none'; }, 3000);
     });
   })();
 </script>
