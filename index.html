@@ -145,36 +145,39 @@
         <div class="grid">
 <input type="number" name="imp_m1" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required
        oninput="
-       if(this.value===''){return;} 
        let val = parseInt(this.value);
-       if(val>5) val=5; 
-       if(val<1) val=1;
-       this.value = val;">
+       if(!isNaN(val)){
+         if(val>5) val=5;
+         if(val<1) val=1;
+         this.value = val;
+       }">
 
 <input type="number" name="imp_m2" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required
        oninput="
-       if(this.value===''){return;} 
        let val = parseInt(this.value);
-       if(val>5) val=5; 
-       if(val<1) val=1;
-       this.value = val;">
+       if(!isNaN(val)){
+         if(val>5) val=5;
+         if(val<1) val=1;
+         this.value = val;
+       }">
 
 <input type="number" name="imp_m3" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required
        oninput="
-       if(this.value===''){return;} 
        let val = parseInt(this.value);
-       if(val>5) val=5; 
-       if(val<1) val=1;
-       this.value = val;">
+       if(!isNaN(val)){
+         if(val>5) val=5;
+         if(val<1) val=1;
+         this.value = val;
+       }">
 
 <input type="number" name="imp_m4" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required
        oninput="
-       if(this.value===''){return;} 
        let val = parseInt(this.value);
-       if(val>5) val=5; 
-       if(val<1) val=1;
-       this.value = val;">
-       </div>
+       if(!isNaN(val)){
+         if(val>5) val=5;
+         if(val<1) val=1;
+         this.value = val;
+       }">
 
         <label>11) Satın alırken en önemli faktör</label>
         <select name="main_factor" required>
