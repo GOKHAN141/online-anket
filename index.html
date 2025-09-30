@@ -143,18 +143,38 @@
 
         <label>10) Dürtüsellik — 1 (hiç) → 5 (çok)</label>
         <div class="grid">
-        <input type="number" name="imp_m1" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required
-         oninput="if(this.value===''){return;} if(this.value>5) this.value=5; if(this.value<1) this.value=1; this.value=Math.floor(this.value);">
+<input type="number" name="imp_m1" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required
+       oninput="
+       if(this.value===''){return;} 
+       let val = parseInt(this.value);
+       if(val>5) val=5; 
+       if(val<1) val=1;
+       this.value = val;">
 
-        <input type="number" name="imp_m2" min="1" max="5" placeholder="İyi fırsat görünce anında alırım (1-5)" required
-         oninput="if(this.value===''){return;} if(this.value>5) this.value=5; if(this.value<1) this.value=1; this.value=Math.floor(this.value);">
+<input type="number" name="imp_m2" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required
+       oninput="
+       if(this.value===''){return;} 
+       let val = parseInt(this.value);
+       if(val>5) val=5; 
+       if(val<1) val=1;
+       this.value = val;">
 
-        <input type="number" name="imp_m3" min="1" max="5" placeholder="Sepetteki ürünleri kısa sürede tamamlarım (1-5)" required
-         oninput="if(this.value===''){return;} if(this.value>5) this.value=5; if(this.value<1) this.value=1; this.value=Math.floor(this.value);">
+<input type="number" name="imp_m3" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required
+       oninput="
+       if(this.value===''){return;} 
+       let val = parseInt(this.value);
+       if(val>5) val=5; 
+       if(val<1) val=1;
+       this.value = val;">
 
-        <input type="number" name="imp_m4" min="1" max="5" placeholder="Duygular seçimimi etkiler (1-5)" required
-         oninput="if(this.value===''){return;} if(this.value>5) this.value=5; if(this.value<1) this.value=1; this.value=Math.floor(this.value);">
-</div>
+<input type="number" name="imp_m4" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required
+       oninput="
+       if(this.value===''){return;} 
+       let val = parseInt(this.value);
+       if(val>5) val=5; 
+       if(val<1) val=1;
+       this.value = val;">
+       </div>
 
         <label>11) Satın alırken en önemli faktör</label>
         <select name="main_factor" required>
