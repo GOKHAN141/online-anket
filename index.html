@@ -143,10 +143,10 @@
 
         <label>10) Dürtüsellik — 1 (hiç) → 5 (çok)</label>
         <div class="grid">
-          <input type="number" name="imp_m1" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required>
-          <input type="number" name="imp_m2" min="1" max="5" placeholder="İyi fırsat görünce anında alırım (1-5)" required>
-          <input type="number" name="imp_m3" min="1" max="5" placeholder="Sepetteki ürünleri kısa sürede tamamlarım (1-5)" required>
-          <input type="number" name="imp_m4" min="1" max="5" placeholder="Duygular seçimimi etkiler (1-5)" required>
+          <input type="number" name="imp_m1" min="1" max="5" placeholder="Genelde hızlı karar veririm (1-5)" required oninput="if(this.value>5)this.value=5;">
+          <input type="number" name="imp_m2" min="1" max="5" placeholder="İyi fırsat görünce anında alırım (1-5)" required oninput="if(this.value>5)this.value=5;">
+          <input type="number" name="imp_m3" min="1" max="5" placeholder="Sepetteki ürünleri kısa sürede tamamlarım (1-5)" required oninput="if(this.value>5)this.value=5;">
+          <input type="number" name="imp_m4" min="1" max="5" placeholder="Duygular seçimimi etkiler (1-5)" required oninput="if(this.value>5)this.value=5;">
         </div>
 
         <label>11) Satın alırken en önemli faktör</label>
