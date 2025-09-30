@@ -129,10 +129,11 @@
           <option>Iğdır</option><option>Yalova</option><option>Karabük</option><option>Osmaniye</option><option>Diğer</option>
         </select>
 
-        <!-- Diğer form alanları (4-11) ve checkbox -->
-        <label>4) Aylık kişisel geliriniz (opsiyonel)</label>
-        <input type="number" name="income" placeholder="Örn: 4500 TL" min="0" step="1">
+        <!-- 4) Aylık kişisel geliriniz (artık zorunlu) -->
+        <label>4) Aylık kişisel geliriniz (TL)</label>
+        <input type="number" name="income" placeholder="Örn: 4500 TL" min="0" step="1" required>
 
+        <!-- 5) En sık kullandığınız platform -->
         <label>5) En sık kullandığınız platform</label>
         <select name="platform" required>
           <option value="">Seçiniz</option>
@@ -144,7 +145,10 @@
         <div class="grid">
           <div>
             <label class="small-label">6) Son 1 ayda kaç kez online alışveriş yaptınız?</label>
-            <select name="monthly_freq" required><option value="">Seçiniz</option><option>Hiç</option><option>1-2</option><option>3-5</option><option>6-10</option><option>10+</option></select>
+            <select name="monthly_freq" required>
+              <option value="">Seçiniz</option>
+              <option>Hiç</option><option>1-2</option><option>3-5</option><option>6-10</option><option>10+</option>
+            </select>
           </div>
           <div>
             <label>7) Ortalama sipariş başı harcama (TL)</label>
@@ -201,6 +205,13 @@
     var iframe = document.querySelector('iframe[name="hidden_iframe"]');
 
     form.addEventListener('submit', function(e){
+      // Basit extra client-side kontrol: required alanların dolu olduğundan emin olmak için
+      if(!form.checkValidity()){
+        // HTML5 built-in validation message'larını göster
+        form.reportValidity();
+        return;
+      }
+
       btn.disabled = true;
       btn.style.opacity = 0.6;
       overlay.style.display = 'flex';
